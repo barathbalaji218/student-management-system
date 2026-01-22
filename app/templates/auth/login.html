@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center">
+                <h4>🔐 Login</h4>
+            </div>
+            
+            <div class="card-body p-4">
+                <form action="" method="post">
+                    <div class="mb-3">
+                        <label for="form-label">Email / Phone</label>
+                        <input type="text" name="email_or_phone" class="form-control" placeholder="Enter email or phone number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-primary btn-lg">Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer text-center">
+                <small>
+                    New User?
+                    <a href="/register" class="text-decoration-none fw-bold">Create Account</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

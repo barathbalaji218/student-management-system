@@ -1,0 +1,42 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.btn {
+    border-radius: 20px;
+}
+
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 8px;
+    background: #f4f6f8;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.form-card {
+    max-width: 400px;
+}

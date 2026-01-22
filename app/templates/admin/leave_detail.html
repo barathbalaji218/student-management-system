@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-info text-white">
+      Leave Request Details
+    </div>
+
+    <div class="card-body">
+      <p><strong>Student:</strong> {{ student.name }}</p>
+      <p><strong>Reason:</strong> {{ leave.reason }}</p>
+      <p><strong>From:</strong> {{ leave.from_date }}</p>
+      <p><strong>To:</strong> {{ leave.to_date }}</p>
+
+      <p>
+        <strong>Status:</strong>
+        {% if leave.status == 'approved' %}
+          <span class="badge bg-success">Approved</span>
+        {% elif leave.status == 'rejected' %}
+          <span class="badge bg-danger">Rejected</span>
+        {% else %}
+          <span class="badge bg-warning text-dark">Pending</span>
+        {% endif %}
+      </p>
+
+      {% if leave.status == 'pending' %}
+      <hr>
+
+      <form method="POST" action="{{ url_for('admin.approve_leave', leave_id=leave._id) }}" class="mb-3">
+        <input name="remark" class="form-control mb-2" placeholder="Approval remark">
+        <button class="btn btn-success">Approve</button>
+      </form>
+
+      <form method="POST" action="{{ url_for('admin.reject_leave', leave_id=leave._id) }}">
+        <input name="remark" class="form-control mb-2" placeholder="Rejection reason">
+        <button class="btn btn-danger">Reject</button>
+      </form>
+      {% endif %}
+      <hr>
+      <a href="{{ url_for('admin.view_leave_request') }}"
+        class="btn btn-outline-secondary mb-3">
+        ← Back to Leave Requests
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

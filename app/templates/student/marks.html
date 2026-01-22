@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}My Marks{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">📊 My Marks</h2>
+        <a href="/student/dashboard" class="btn btn-outline-secondary">
+            ⬅ Back to Dashboard
+        </a>
+    </div>
+
+    {% if marks %}
+    <div class="card shadow border-0">
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-primary text-center">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Marks Obtained</th>
+                            <th>Total</th>
+                            <th>Performance</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {% for mark in marks %}
+                        <tr>
+                            <td class="fw-semibold">{{ mark.subject }}</td>
+
+                            <td>
+                                <span class="badge bg-info fs-6">
+                                    {{ mark.marks }}
+                                </span>
+                            </td>
+
+                            <td>100</td>
+
+                            <td style="width: 30%;">
+                                <div class="progress" style="height: 18px;">
+                                    <div class="progress-bar 
+                                        {% if mark.marks >= 75 %}
+                                            bg-success
+                                        {% elif mark.marks >= 40 %}
+                                            bg-warning
+                                        {% else %}
+                                            bg-danger
+                                        {% endif %}
+                                    " 
+                                    role="progressbar" 
+                                    style="width: {{ mark.marks|int }}%;"
+                                    aria-valuenow="{{ mark.marks|int }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                        {{ mark.marks }}%
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if mark.marks >= 40 %}
+                                    <span class="badge bg-success">Pass</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Needs Improvement</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    {% else %}
+        <div class="alert alert-warning text-center shadow-sm">
+            ⚠ No marks available yet.
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

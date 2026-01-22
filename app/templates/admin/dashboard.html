@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock  %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4 text-primary">
+        👨‍💼 Admin Dashboard
+    </h2>
+
+    <div class="row g-4">
+
+        <!-- Total students -->
+         <div class="col-md-3">
+            <a href="{{ url_for('admin.view_student') }}" class="text-decoration-none">
+                <div class="card shadow-sm text-center bg-warning bg-opacity-25  h-100">
+                    <div class="card-body">
+                        <h5 class="text-muted card-title">Total Students</h5>
+                        <h2 class="text-warning">{{ total_students }}</h2>
+                    </div>
+                </div>
+            </a>
+         </div>
+
+        <!-- Blocked Students -->
+         <div class="col-md-3">
+            <a href="{{ url_for('admin.view_student', status='blocked') }}" class="text-decoration-none">
+                <div class="card shadow-sm text-center bg-danger bg-opacity-25  h-100">
+                    <div class="card-body"> 
+                        <h5 class="text-muted card-title ">Blocked Students</h5>
+                        <h2 class="text-danger">{{ blocked_students }}</h2>
+                    </div>
+                </div>
+            </a>
+         </div> 
+
+        <!-- Total Subjects -->
+        <div class="col-md-3">
+            <a href="{{ url_for('admin.view_subject') }}" class="text-decoration-none">
+                <div class="card shadow-sm text-center bg-success bg-opacity-25  h-100">
+                    <div class="card-body">
+                        <h5 class="text-muted card-title">Total Subjects</h5>
+                        <h2 class="text-success">{{ total_subjects }}</h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Total Marks -->
+        <div class="col-md-3">
+            <a href="{{ url_for('admin.view_leave_request') }}" class="text-decoration-none">
+                <div class="card text-white bg-info shadow h-100 bg-opacity-25">
+                    <div class="card-body text-center">
+                    <h5 class="text-muted card-title">Student Leave Requests</h5>
+                    <h2>{{ total_leaves }}</h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock  %}

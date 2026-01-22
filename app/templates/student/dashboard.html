@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+    <h2 class="fw-bold mb-4 text-primary">👋 Welcome to Your Dashboard</h2>
+
+    <!-- Dashboard Cards -->
+    <div class="row g-4">
+
+        <!-- Total Subjects -->
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center bg-primary text-white h-100">
+                <div class="card-body">
+                    <h6>Total Subjects</h6>
+                    <h2 class="fw-bold">{{ total_subjects }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Average Marks -->
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center bg-success text-white h-100">
+                <div class="card-body">
+                    <h6>Average Marks</h6>
+                    <h2 class="fw-bold">{{ avg_marks }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Highest Marks -->
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center bg-warning text-dark h-100">
+                <div class="card-body">
+                    <h6>Highest Mark</h6>
+                    <h2 class="fw-bold">{{ highest_marks }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lowest Marks -->
+        <div class="col-md-3">
+            <div class="card shadow border-0 text-center bg-danger text-white h-100">
+                <div class="card-body">
+                    <h6>Lowest Mark</h6>
+                    <h2 class="fw-bold">{{ lowest_marks }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <a href="/student/marks" class="btn btn-outline-primary w-100 py-3 shadow-sm">
+                📊 View Marks
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="/student/leave-request" class="btn btn-outline-success w-100 py-3 shadow-sm">
+                📝 Request Leave
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="/student/leave-status" class="btn btn-outline-warning w-100 py-3 shadow-sm">
+                📌 Leave Status
+            </a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

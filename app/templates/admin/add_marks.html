@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+
+      <div class="card shadow-lg">
+        <div class="card-header bg-success text-white text-center">
+          <h4 class="mb-0">Add Marks</h4>
+        </div>
+
+        <div class="card-body">
+          <form method="POST">
+
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              {% if subjects %}
+                <select name="subject_id" class="form-select" required>
+                    <option value="">-- Select Subject --</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject._id }}">{{ subject.subject_name }}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                <p class="text-muted">All subjects already graded for this student</p>
+                {% endif %}
+
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Marks</label>
+              <input
+                type="number"
+                name="marks"
+                class="form-control"
+                min="0"
+                max="100"
+                placeholder="Enter marks"
+                required
+              >
+            </div>
+
+            <div class="d-grid">
+              <button class="btn btn-success">Save Marks</button>
+            </div>
+
+            <a href="{{ url_for('admin.student_detail', student_id=student_id) }}"
+              class="btn btn-outline-secondary w-100 mt-3">
+              ← Back to Student
+            </a>
+
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid mt-4">
+
+  <div class="row">
+
+    <!-- LEFT SIDE: STUDENT INFO -->
+    <div class="col-md-4 mb-3">
+      <div class="card shadow h-100">
+        <div class="card-header bg-primary text-white">
+          Student Details
+        </div>
+
+        <div class="card-body">
+          <p>
+            <strong>Status:</strong>
+            {% if student.is_blocked %}
+              <span class="badge bg-danger">Blocked</span>
+            {% else %}
+              <span class="badge bg-success">Active</span>
+            {% endif %}
+          </p>
+          <p><strong>Name:</strong> {{ student.name }}</p>
+          <p><strong>Email:</strong> {{ student.email }}</p>
+          <p><strong>Phone:</strong> {{ student.phone }}</p>
+
+          <a href="{{ url_for('admin.view_student') }}"
+             class="btn btn-outline-secondary w-100 mt-3">
+            ← Back to Students
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT CARD – MARKS -->
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          Student Marks
+        </div>
+
+        <div class="card-body" style="max-height: 350px; overflow-y: auto;">
+          {% if marks %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Obtained</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for mark in marks %}
+              <tr>
+                <td>{{ mark.subject.subject_name }}</td>
+                <td>{{ mark.marks }}</td>
+                <td>100</td>
+                <td>
+                  <a href="{{ url_for('admin.edit_marks', mark_id=mark._id) }}"
+                     class="btn btn-sm btn-warning">
+                    Edit
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+            <p class="text-muted text-center">No marks available for this student</p>
+          {% endif %}
+        </div>
+
+        <!-- ADD MARKS BUTTON (OUTSIDE TABLE) -->
+        <div class="card-footer text-end">
+          <a href="{{ url_for('admin.add_marks', student_id=student._id) }}"
+             class="btn btn-primary">
+             + Add Marks
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

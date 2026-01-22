@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Leave Status{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="mb-4">📌 Leave Requests</h3>
+
+    {% if leaves %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Reason</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Status</th>
+                        <th>Admin Remark</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for leave in leaves %}
+                    <tr>
+                        <td>{{ leave.reason }}</td>
+                        <td>{{ leave.from_date }}</td>
+                        <td>{{ leave.to_date }}</td>
+                        <td>
+                            {% if leave.status == 'approved' %}
+                                <span class="badge bg-success">Approved</span>
+                            {% elif leave.status == 'rejected' %}
+                                <span class="badge bg-danger">Rejected</span>
+                            {% else %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ leave.admin_remark or '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            No leave requests found.
+        </div>
+    {% endif %}
+
+    <a href="/student/dashboard" class="btn btn-secondary mt-3">
+        ⬅ Back to Dashboard
+    </a>
+</div>
+{% endblock %}

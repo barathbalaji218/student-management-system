@@ -1,0 +1,156 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Management System{% endblock %}</title>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--Custom Css-->
+    <style>
+        .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+    </style>
+
+    
+</head>     
+<body class="bg-light d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/">🎓 Student Management System</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse fade-in" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                {% if not session.get('user_id') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-warning btn-sm ms-2" href="/register">
+                            Register
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if session.get('role') == 'admin' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">Admin Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/student">Students</a>
+                    </li>
+                {% elif session.get('role') == 'student' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student/marks">Marks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student/leave-status">Leave</a>
+                    </li>
+                {% endif %}
+
+                {% if session.get('user_id') %}
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light btn-sm ms-3" href="/logout">
+                            Logout
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="flex-fill">
+
+    <div class="container fade-in mt-4">
+        <!-- Flash Messages -->
+        {% with messages= get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    {% block content %}{% endblock %}
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer class="bg-dark text-light mt-5">
+    <div class="container py-4 fade-in">
+        <div class="row align-items-center">
+
+            <!-- Left section -->
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <h5 class="mb-1">Student Management System</h5>
+                <p class="small mb-0 text-secondary">
+                    A full-stack Flask application
+                </p>
+            </div>
+
+            <!-- Right section -->
+            <div class="col-md-6 text-center text-md-end">
+                <p class="mb-2">
+                    <a href="mailto:barathbalaji218@gmail.com"
+                       class="text-light text-decoration-none d-inline-flex align-items-center gap-2">
+                        📧 <span>barathbalaji218@gmail.com</span>
+                    </a>
+                </p>
+
+                <p class="mb-2">
+                    <a href="https://github.com/barathbalaji218"
+                       target="_blank"
+                       class="text-light text-decoration-none d-inline-flex align-items-center gap-2">
+                        🐙 <span>GitHub</span>
+                    </a>
+                </p>
+
+                <p class="mb-0">
+                    <a href="https://www.linkedin.com/in/barathbalaji-baskar-8a5790215"
+                       target="_blank"
+                       class="text-light text-decoration-none d-inline-flex align-items-center gap-2">
+                        💼 <span>LinkedIn</span>
+                    </a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<style>
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Leave Management{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="mb-4">📝 Leave Management</h3>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5>Apply for Leave</h5>
+                    <p class="text-muted">Submit a new leave request</p>
+                    <a href="/student/leave-request" class="btn btn-primary">
+                        Apply Leave
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5>Leave Status</h5>
+                    <p class="text-muted">Track your leave requests</p>
+                    <a href="/student/leave-status" class="btn btn-success">
+                        View Status
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

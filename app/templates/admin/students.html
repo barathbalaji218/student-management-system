@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Students{% endblock  %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">🎓 Student Management</h2>
+    
+    {% if students %}
+    <div class="table-responaive">
+        <table class="table table-hover align-middle shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th class="text-center" width = "30%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>
+                        {% if student.is_blocked %}
+                            <span class="badge bg-danger">Blocked</span>                            
+                        {% else %}
+                            <span class="badge bg-success">Active</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <a href="{{ url_for('admin.student_detail', student_id=student._id) }}" class="btn btn-sm btn-info">View</a>
+                        <a href="{{ url_for('admin.toggle_block', student_id=student._id) }}" class="btn btn-sm btn-warning">
+                            {% if student.is_blocked %}Unblock{% else %}Block{% endif %}
+                        </a>
+                        
+                        <!-- Delete Button -->
+                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ student._id }}">
+                            Delete
+                         </button>
+
+                         <!-- Modal -->
+                          <div class = "modal fade" id= "deleteModal{{ student._id }}" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Confirm Delete</h5>
+                                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete
+                                        <strong>{{ student.name }}</strong>?
+                                    </div>    
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                            Cancel
+                                        </button>
+
+                                        <a href="{{ url_for('admin.delete_student', student_id=student._id) }}" class="btn btn-danger">Yes, Delete</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                          </div>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        
+    </div>
+    {% else %}
+        <div class="alert alert-info">No students found.</div>
+    {% endif %}
+
+</div>
+    
+{% endblock  %}
